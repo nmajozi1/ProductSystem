@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="page-header">
+        <h1>{{header}}</h1>
+    </div>
+</div>
+<div class="container" layout="row" layout-align="space-around">
+    <div class="md-whiteframe-z5" style="width: 450px; height: 500; padding-top: 30px; padding-left: 30px; padding-right: 30px">
+        <div class="content" style="text-align:center">
+            <h2>Login</h2>
+        </div>
+        <md-divider></md-divider>
+        <form name="useForm">
+            <div class="content" style="padding-top:40px">
+                <md-input-container class="md-block">
+                    <label>{{lblUsername}}</label>
+                    <input type="email" name="txtUsername" ng-model="loginData.email" required="">
+                    <div ng-messages="useForm.txtUsername.$error" role="alert" multiple="">
+                        <div ng-message="required" class="my-message">Please enter your email address.</div>
+                        <div ng-message="email" class="my-message">Invalid email address.</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div class="content" style="padding-top:15px">
+                <md-input-container class="md-block">
+                    <label>{{lblPassword}}</label>
+                    <input type="password" name="txtPassword" ng-model="loginData.password" required="" md-maxlength="16" minlength="8">
+                    <div ng-messages="useForm.txtPassword.$error" role="alert" multiple="">
+                        <div ng-message="required" class="my-message">Please enter your password.</div>
+                        <div ng-message="md-maxlength" class="my-message">Password is too long</div>
+                        <div ng-message="minlength" class="my-message">Password is too short</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div class="content" layout="row">
+                <md-button class="md-raised md-primary" ng-click="register()">Register</md-button>
+                <md-button ng-disabled="!useForm.$valid" ng-click="login(loginData)" class="md-raised md-primary">Login</md-button>
+            </div>
+            <div class="content" style="text-align:center; padding-top:30px">
+                <a href="" class="md-primary"><b>Forgot password?</b></a>
+            </div>
+        </form>
+    </div>
+</div>

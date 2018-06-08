@@ -1,0 +1,64 @@
+<div layout="row" layout-align>
+    <div class="md-whiteframe-z1" style="width:400px; height:950">
+        <div class="container" style="width:400px; text-align:center">
+            <h2>{{logo}}</h2>
+            <md-divider></md-divider>
+            <div class="content" style="padding-top:80px">
+                <md-divider></md-divider>
+                <md-button style="width:372px">{{buttons.bills}}</md-button>
+                <md-divider></md-divider>
+                <md-button style="width:372px">{{buttons.sysSetup}}</md-button>
+                <md-divider></md-divider>
+                <md-button style="width:372px">{{buttons.taxCalc}}</md-button>
+                <md-divider></md-divider>
+            </div>
+        </div>
+    </div>
+    <div class="content" style="width:100%">
+        <div class="md-whiteframe-z1" style="width:100%; height:62px">
+
+        </div>
+        <div class="container" style="padding-top:60px" layout="row" layout-align="space-around">
+            <div class="md-whiteframe-z5" style="width:1360px; height:600px">
+                <div-class="content" layout="row">
+                    <md-input-container layout="column" style="padding-top:20px; padding-left:40px;">
+                        <md-checkbox ng-model="data.rent" aria-label="Rent">Accomodation</md-checkbox>
+                        <md-checkbox ng-model="data.car" aria-label="Rent">Car Intallment</md-checkbox>
+                        <md-checkbox ng-model="data.insurance" aria-label="Rent">Insurance</md-checkbox>
+                        <md-checkbox ng-model="data.medicalAid" aria-label="Rent">Health Care</md-checkbox>
+                        <md-checkbox ng-model="data.provident" aria-label="Rent">Provident Fund</md-checkbox>
+                        <md-checkbox ng-model="data.travel" aria-label="Rent">Petrol</md-checkbox>
+                        <md-checkbox ng-model="data.food" aria-label="Rent">Food</md-checkbox>
+                        <md-checkbox ng-model="data.entertainment" aria-label="Rent">Entertainment</md-checkbox>
+                        <md-checkbox ng-model="data.rates" aria-label="Rent">Rates/Levy</md-checkbox>
+                    </md-input-container>
+                    <md-input-container layout="column" style="padding-top:20px; padding-left:200px;">
+                        <md-checkbox ng-model="data.dstv" aria-label="Rent">Dstv</md-checkbox>
+                        <md-checkbox ng-model="data.phone" aria-label="Rent">Phone</md-checkbox>
+                        <md-checkbox ng-model="data.internet" aria-label="Rent">Internet</md-checkbox>
+                        <md-checkbox ng-model="data.gym" aria-label="Rent">Gym</md-checkbox>
+                        <md-checkbox ng-model="data.holiday" aria-label="Rent">Holiday</md-checkbox>
+                        <md-checkbox ng-model="data.tuition" aria-label="Rent">Tuition</md-checkbox>
+                        <md-checkbox ng-model="data.books" aria-label="Rent">Books</md-checkbox>
+                        <md-checkbox ng-model="data.savings" aria-label="Rent">Savings</md-checkbox>
+                        <md-checkbox ng-model="data.investments" aria-label="Rent">Investments</md-checkbox>
+                    </md-input-container>
+                    <md-input-container layout="column" style="padding-top:20px; padding-left:200px;">
+                        <md-checkbox ng-model="data.accounts" aria-label="Rent">Accounts</md-checkbox>
+                        <md-checkbox ng-model="data.phone" aria-label="Rent">Loans</md-checkbox>
+                        <md-checkbox ng-model="data.credit" aria-label="Rent">Credit Cards</md-checkbox>
+                        <md-checkbox ng-model="data.apple" aria-label="Rent">Apple Music</md-checkbox>
+                        <md-checkbox ng-model="data.netflix" aria-label="Rent">Netflix</md-checkbox>
+                        <md-checkbox ng-model="data.showmax" aria-label="Rent">Showmax</md-checkbox>
+                        <md-checkbox ng-model="data.electricity" aria-label="Rent">Electricity</md-checkbox>
+                        <md-checkbox ng-model="data.water" aria-label="Rent">Water</md-checkbox>
+                        <md-checkbox ng-model="data.other" aria-label="Rent">Other</md-checkbox>
+                    </md-input-container>
+                </div>
+                <md-input-container>
+                    <md-button class="raised primary">Test Button</md-button>
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+</div>

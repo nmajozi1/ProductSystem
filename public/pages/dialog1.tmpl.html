@@ -1,0 +1,31 @@
+<md-dialog aria-label="Mango (Fruit)" style="width:800px">
+    <form name="useForm" ng-cloak>
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>Add A New Product.</h2>
+        </div>
+      </md-toolbar>
+  
+      <md-dialog-content>
+        <div class="md-dialog-content">
+            <md-input-container class="md-block">
+                <label>Product Name</label>
+                <input type="text" name="txtCourierName" ng-model="productData.productName" required="">
+                <div ng-messages="useForm.txtCourierName.$error" role="alert" multiple="">
+                    <div ng-message="required" class="my-message">Please enter the product name.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Product Price</label>
+                <input type="number" name="txtRouteNumber" ng-model="productData.productPrice" required="">
+            </md-input-container>
+        </div>
+      </md-dialog-content>
+  
+      <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="answer('Cancel')" class="md-raised md-primary" >Cancel</md-button>
+        <md-button ng-disabled="!useForm.$valid" ng-click="answer('addProduct', productData)" class="md-raised md-primary">Ok</md-button>
+      </md-dialog-actions>
+    </form>
+  </md-dialog>

@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="page-header">
+        <h1>{{header}}</h1>
+    </div>
+    <div class="container" layout="row" layout-align="space-around">
+        <div class="md-whiteframe-z5" style="width:450px; height:500px; padding-top: 30px; padding-left: 30px; padding-right: 30px">
+            <form name="regForm">
+                <md-input-container class="md-block">
+                    <label>Name</label>
+                    <input type="text" name="txtName" ng-model="reg.name" required>
+                    <div ng-messages="regForm.txtName.$error" role="alert" multiple="">
+                        <div ng-message="required" class="my-message">Please enter your Name.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Surname</label>
+                    <input type="text" name="txtSurname" ng-model="reg.surname" required>
+                    <div ng-messages="regForm.txtSurname.$error" role="alert" multiple="">
+                        <div ng-message="required" class="my-message">Pmease enter your surname.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Email</label>
+                    <input type="email" name="txtEmail" ng-model="reg.email" required>
+                    <div ng-messages="regForm.txtEmail.$error" role="alert" multiple="">
+                        <div ng-message="required" class="my-message">Please enter email address.</div>
+                        <div ng-message="email" class="my-message">Please enter a valid email address.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Password</label>
+                    <input type="password" name="txtPassword" ng-model="reg.password" required md-maxlength="16" minlength="8">
+                    <div ng-messages="regForm.txtPassword.$error" role="alert" multiple="">
+                        <div ng-message="required" class="my-message">Please enter your password.</div>
+                        <div ng-message="md-maxlength" class="my-message">Your password is too long.</div>
+                        <div ng-message="minlength" class="my-message">Your password must be a minimum of 8 characters.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Re-type Password</label>
+                    <input type="password" name="txtRetype" ng-model="reg.retype" required md-maxlength="16" minlength="8">
+                    <div ng-messages="regForm.txtRetype.$error" role="alert" multiple="">
+                        <div ng-message="required" class="my-message">Please re-enter your password.</div>
+                        <div ng-message="md-maxlength" class="my-message">Your password is too long.</div>
+                        <div ng-message="minlength" class="my-message">Your password must be a minimum of 8 characters.</div>
+                    </div>
+                </md-input-container>
+                <div class="content" layout="row">
+                    <md-button class="md-raised md-primary" ng-click="cancel()">Canel</md-button>
+                    <md-button ng-disabled="!regForm.$valid" class="md-raised md-Primary" ng-click="register(reg)">Register</md-button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
