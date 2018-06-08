@@ -1,7 +1,7 @@
 <div layout="row" layout-align>
     <div class="md-whiteframe-z1" style="width:400px; height:100%; background-color: blue">
         <div class="container" style="width:400px; text-align:center">
-            <h2 style="color:black">{{logo}}</h2>
+            <h2 style="color:white;">{{logo}}</h2>
             <md-divider></md-divider>
             <div class="content" style="padding-top:20px; text-align:left">
                 <md-list-item class="md-2-line" ng-click="viewProducts()">
@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div class="container" ng-hide="hideExample" style="transition: all linear 0.5s">
+    <div class="container" style="transition: all linear 0.5s">
         <div class="md-whiteframe-z1" style="width:100%; height:800px">
             <div class="page-header" style="padding-top:20px; padding-left: 10px">
                 <h3>
@@ -47,6 +47,10 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        <div class="container">
+            <h3>My Account: R {{credit}}</h3>
         </div>
     </div>
 </div>

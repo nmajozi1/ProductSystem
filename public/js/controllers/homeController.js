@@ -1,8 +1,4 @@
 app.controller('homeController', function($scope, $location, $timeout, $http, $routeParams,$rootScope, $mdDialog) {
-    $scope.hideExample = true
-    $scope.hideUserTable = true
-
-
     $scope.header = ' H O M E';
     $scope.logo = ' H Y B R I D ';
 
@@ -18,15 +14,7 @@ app.controller('homeController', function($scope, $location, $timeout, $http, $r
     $scope.email    = jsonLoginData.email
 
     $scope.viewProducts = function(){
-        if($scope.hideExample)
-            if(!$scope.hideUserTable) {
-                $scope.hideUserTable = true
-                $scope.hideExample = false
-            } else {
-                $scope.hideExample = false
-            }
-        else
-            $scope.hideExample = true
+        
     }
 
     $rootScope.refresh = function () {
@@ -36,6 +24,18 @@ app.controller('homeController', function($scope, $location, $timeout, $http, $r
                 $scope.productItems = response.data.data
             }  else {
                 console.log(response.data.message)
+            }
+        })
+
+        var userData = {email: $scope.email}
+        var strUserData = JSON.stringify(userData)
+
+        $http.post('/login/'+ strUserData).then(function(response) {
+            if(response.data.code == '00') {
+                console.log(response.data.data)
+                $scope.credit = response.data.data.credit
+            } else {
+                console.log('------------------------ USERS NOT FOUND')
             }
         })
     }
