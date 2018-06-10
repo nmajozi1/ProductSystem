@@ -111,6 +111,8 @@ app.controller('homeController', function($scope, $location, $timeout, $http, $r
         }, function() {});
       }
 
+      // ~~~~~~~~~~~~~~~~~~~~~~~ TOP UP ACCOUNT.
+
       $scope.topUp = function(credit) {
         var confirm = $mdDialog.confirm()
         .title('Would you like to top up your account?')
@@ -158,5 +160,35 @@ app.controller('homeController', function($scope, $location, $timeout, $http, $r
               }
           })
         };
+      }
+
+      // ~~~~~~~~~~~~~~~~~~~~~~~ PURCHASE THE PRODUCT.
+      $scope.purchaseProduct = function(prodName) {
+        var confirm = $mdDialog.confirm()
+        .title('Would you like to purchase product: ' + prodName)
+        .cancel('Cancel')
+        .ok('Yes')
+
+        $mdDialog.show(confirm).then(function() {
+            var purchaseData = {productName: prodName, email: jsonLoginData.email}
+            var strPurchData = JSON.stringify(purchaseData)
+
+            console.log(strPurchData)
+
+            $http.post('/purchaseProduct/' + strPurchData).then(function(response) {
+                if(response.data.code == '00') {
+                    $rootScope.refresh()
+                } else {
+                    // console.log('There is a problem: ' + response.data.message)
+                    var confirm = $mdDialog.alert()
+                    .title(response.data.message)
+                    .ok('Ok')
+
+                    $mdDialog.show(confirm).then(function() {
+                    // console.log(' THIS IS THE CORRECT PART OF THE OK BUTTON: ')
+                    }, function() {});
+                }
+            }) 
+        }, function() {});
       }
 })

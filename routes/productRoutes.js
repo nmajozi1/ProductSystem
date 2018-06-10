@@ -33,4 +33,12 @@ router.post('/removeProduct/:ToDo', function(req, res) {
     })
 })
 
+router.post('/purchaseProduct/:ToDo', function(req, res) {
+    var purchaseData = JSON.parse(req.params.ToDo)
+
+    productMod.purchaseProduct(purchaseData, function(response) {
+        res.send(response)
+    })
+})
+
 module.exports = router

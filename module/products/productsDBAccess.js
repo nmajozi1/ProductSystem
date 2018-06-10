@@ -53,6 +53,22 @@ ProductDB.prototype.getAllProducts = function(callback) {
     })
 }
 
+ProductDB.prototype.getSingleProduct = function(productName, callback) {
+    var responseMessage
+     
+    Products.findOne({productName: productName}, function(err, docs) {
+        if(!err && docs) {
+            responseMessage = {code: '00', message: 'success', data: docs}
+
+            callback(responseMessage)
+        } else {
+            responseMessage = {code: '01', message: 'Could not find the products.'}
+
+            callback(responseMessage)
+        }
+    })
+}
+
 ProductDB.prototype.removeProduct = function(productName, callback) {
     var responseMessage
 

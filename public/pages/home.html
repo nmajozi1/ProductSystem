@@ -42,7 +42,10 @@
                                 <!-- <span ng-click="editCourier(item)" class="glyphicon glyphicon-cog"></span> &nbsp; &nbsp; -->
                                 {{ item.productName }}
                             </td>
-                            <td>R {{ item.productPrice }}</td>
+                            <td>
+                                R {{ item.productPrice }} &nbsp; &nbsp;
+                                <span ng-click="purchaseProduct(item.productName)" class="glyphicon glyphicon-shopping-cart"></span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
