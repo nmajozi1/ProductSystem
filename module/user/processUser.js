@@ -1,16 +1,26 @@
 var log4js      = require('log4js')
 var logger      = log4js.getLogger('PROCESS USER')
+var moment      = require('moment')
 
 logger.level    = 'debug'
 
 var ProcessUser = function() {}
 
 ProcessUser.prototype.topUp = function(userData, topUpAmount, callback) {
-    logger.debug('Do I make it in here?')
+    // logger.debug('Do I make it in here?')
     var responseMessage
 
     if(userData) {
         if(topUpAmount && topUpAmount > 0) {
+            var transactionLog = {
+                transactionDate: moment().format('DD-MM-YYYY, h:mm a'), 
+                transactionType: 'Top Up',
+                fromAmnt: userData.credit,
+                toAmnt: userData.credit + topUpAmount
+            }
+
+            userData.transaction.push(transactionLog)
+
             userData.credit = userData.credit + topUpAmount
 
             userData.save(function(error, docs) {

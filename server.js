@@ -9,6 +9,7 @@ var logger      = log4js.getLogger('Server')
 // routes
 var userRouter  = require('./routes/routes')
 var prodRouter  = require('./routes/productRoutes')
+var discountRouter = require('./routes/discountRoute')
 
 logger.level    = 'debug'
 
@@ -16,6 +17,7 @@ var app         = express()
 
 app.use(userRouter)
 app.use(prodRouter)
+app.use(discountRouter)
 
 mongoose.connect(dbUrl, function(err) {
     if(err)

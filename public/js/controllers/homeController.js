@@ -33,6 +33,7 @@ app.controller('homeController', function($scope, $location, $timeout, $http, $r
         $http.post('/login/'+ strUserData).then(function(response) {
             if(response.data.code == '00') {
                 console.log(response.data.data)
+                $rootScope.userInfo = response.data.data
                 $scope.credit = response.data.data.credit
             } else {
                 console.log('------------------------ USERS NOT FOUND')
@@ -177,7 +178,13 @@ app.controller('homeController', function($scope, $location, $timeout, $http, $r
 
             $http.post('/purchaseProduct/' + strPurchData).then(function(response) {
                 if(response.data.code == '00') {
-                    $rootScope.refresh()
+                    var confirm = $mdDialog.alert()
+                    .title(response.data.message)
+                    .ok('Ok')
+
+                    $mdDialog.show(confirm).then(function() {
+                        $rootScope.refresh()
+                    }, function() {});
                 } else {
                     // console.log('There is a problem: ' + response.data.message)
                     var confirm = $mdDialog.alert()
@@ -190,5 +197,124 @@ app.controller('homeController', function($scope, $location, $timeout, $http, $r
                 }
             }) 
         }, function() {});
+      }
+
+      // ~~~~~~~~~~~~~~~~~~~~~~~ TRANSACTION HISTORY.
+      $scope.showTransaction = function() {
+        $mdDialog.show({
+            controller: transactionHistoryController,
+            templateUrl: 'pages/transHistoryDialog.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose:true,
+            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+        .then(function(answer) {
+            $scope.status = 'You said the information was "' + answer + '".';
+        }, function() {
+            $scope.status = 'You cancelled the dialog.';
+        });
+      }
+
+      function transactionHistoryController($scope, $mdDialog) {
+        $scope.transHistory = $rootScope.userInfo.transaction
+        $scope.balance = $rootScope.userInfo.credit
+
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+    
+        $scope.answer = function(answer, topUpAmount) {
+          $mdDialog.hide(answer);
+        };
+      }
+
+      // ~~~~~~~~~~~~~~~~~~~~~~~ DISCOUNT INFORMATION.
+      $scope.addDiscount = function(discountData) {
+        // var discData = {min: 50, max: 100, percentage: 0}
+        // var strDiscData = JSON.stringify(discData)
+
+        $mdDialog.show({
+            controller: addDiscountController,
+            templateUrl: 'pages/addDiscount.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose:true,
+            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+        .then(function(answer) {
+            $scope.status = 'You said the information was "' + answer + '".';
+        }, function() {
+            $scope.status = 'You cancelled the dialog.';
+        });
+      }
+
+      function addDiscountController($scope, $mdDialog) {
+        $scope.hide = function() {
+          $mdDialog.hide();
+        };
+    
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+    
+        $scope.answer = function(answer, discountData) {
+          $mdDialog.hide(answer);
+          
+          var strDiscData = JSON.stringify(discountData)
+
+          $http.post('/addDiscount/' + strDiscData).then(function(response) {
+              if(response.data.code == '00') {
+                    // $rootScope.refresh()
+                    console.log('ADD DISCOUNT DATA:')
+              } else {
+                var confirm = $mdDialog.alert()
+                .title(response.data.message)
+                .ok('Ok')
+
+                $mdDialog.show(confirm).then(function() {
+                // console.log(' THIS IS THE CORRECT PART OF THE OK BUTTON: ')
+                }, function() {});
+              }
+          })
+        };
+      }
+
+      $scope.showDiscount = function() {
+        $http.get('/getAllDiscounts').then(function(response) {
+            if(response.data.code == '00') {
+                $mdDialog.show({
+                    controller: discountController,
+                    templateUrl: 'pages/discountDialog.html',
+                    parent: angular.element(document.body),
+                    clickOutsideToClose:true,
+                    fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+                })
+                .then(function(answer) {
+                    $scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    $scope.status = 'You cancelled the dialog.';
+                });
+
+                function discountController($scope, $mdDialog) {
+                    $scope.discounts = response.data.data
+                    // $scope.balance = $rootScope.userInfo.credit
+            
+                    $scope.hide = function() {
+                        $mdDialog.hide();
+                    };
+                
+                    $scope.answer = function(answer, topUpAmount) {
+                      $mdDialog.hide(answer);
+                    };
+                  }
+            } else {
+                var confirm = $mdDialog.alert()
+                .title(response.data.message)
+                .ok('Ok')
+
+                $mdDialog.show(confirm).then(function() {
+                // console.log(' THIS IS THE CORRECT PART OF THE OK BUTTON: ')
+                }, function() {});
+        }
+        })
       }
 })

@@ -1,0 +1,41 @@
+<md-dialog aria-label="Mango (Fruit)" style="width:800px">
+    <form name="useForm" ng-cloak>
+        <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Add A New Discount.</h2>
+        </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+        <div class="md-dialog-content">
+            <md-input-container class="md-block">
+                <label>Min</label>
+                <input type="number" name="txtMin" ng-model="discountData.min" required="">
+                <div ng-messages="useForm.txtMin.$error" role="alert" multiple="">
+                    <div ng-message="required" class="my-message">Please enter the minimum.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Max</label>
+                <input type="number" name="txtMax" ng-model="discountData.max" required="">
+                <div ng-messages="useForm.txtMax.$error" role="alert" multiple="">
+                    <div ng-message="required" class="my-message">Please enter the maximum.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Percentage</label>
+                <input type="number" name="txtPercentage" ng-model="discountData.percentage" required="">
+                <div ng-messages="useForm.txtPercentage.$error" role="alert" multiple="">
+                    <div ng-message="required" class="my-message">Please enter the percentage.</div>
+                </div>
+            </md-input-container>
+        </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="cancel('Cancel')" class="md-raised md-primary" >Cancel</md-button>
+        <md-button ng-disabled="!useForm.$valid" ng-click="answer('addDiscount', discountData)" class="md-raised md-primary">Ok</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

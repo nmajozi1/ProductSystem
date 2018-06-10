@@ -1,0 +1,41 @@
+<md-dialog aria-label="Mango (Fruit)" style="width:800px">
+    <form name="useForm" ng-cloak>
+        <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Transaction History.</h2>
+        </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+        <div class="md-dialog-content">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Transaction Time</th>
+                        <th>Transaction Type</th>
+                        <th>From Amount</th>
+                        <th>To Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="transaction in transHistory">
+                        <td>{{ transaction.transactionDate }}</td>
+                        <td>{{ transaction.transactionType }}</td>
+                        <td>R {{ transaction.fromAmnt }}</td>
+                        <td>R {{ transaction.toAmnt }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="content">
+                <h3>Balance: R {{balance}}</h3>
+            </div>
+        </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button  ng-click="answer()" class="md-raised md-primary">Ok</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
