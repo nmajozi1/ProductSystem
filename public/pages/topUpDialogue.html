@@ -1,0 +1,27 @@
+<md-dialog aria-label="Mango (Fruit)" style="width:800px">
+    <form name="useForm" ng-cloak>
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>Top up my account.</h2>
+        </div>
+      </md-toolbar>
+  
+      <md-dialog-content>
+        <div class="md-dialog-content">
+            <md-input-container class="md-block">
+                <label>Top Up Amount.</label>
+                <input type="number" name="txtAmount" ng-model="amount" required="">
+                <div ng-messages="useForm.txtAmount.$error" role="alert" multiple="">
+                    <div ng-message="required" class="my-message">Please enter a number.</div>
+                </div>
+            </md-input-container>
+        </div>
+      </md-dialog-content>
+  
+      <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="answer('Cancel')" class="md-raised md-primary" >Cancel</md-button>
+        <md-button ng-disabled="!useForm.$valid" ng-click="answer('topUp', amount)" class="md-raised md-primary">Ok</md-button>
+      </md-dialog-actions>
+    </form>
+  </md-dialog>

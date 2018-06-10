@@ -110,4 +110,53 @@ app.controller('homeController', function($scope, $location, $timeout, $http, $r
             }) 
         }, function() {});
       }
+
+      $scope.topUp = function(credit) {
+        var confirm = $mdDialog.confirm()
+        .title('Would you like to top up your account?')
+        .cancel('Cancel')
+        .ok('Yes')
+
+        $mdDialog.show(confirm).then(function() {
+            $mdDialog.show({
+                controller: topUpController,
+                templateUrl: 'pages/topUpDialogue.html',
+                parent: angular.element(document.body),
+                clickOutsideToClose:true,
+                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+            })
+            .then(function(answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+            }, function() {
+                $scope.status = 'You cancelled the dialog.';
+            });
+        }, function() {});
+      }
+
+      function topUpController($scope, $mdDialog) {
+        $scope.hide = function() {
+          $mdDialog.hide();
+        };
+    
+        $scope.cancel = function() {
+          $mdDialog.cancel();
+        };
+    
+        $scope.answer = function(answer, topUpAmount) {
+          $mdDialog.hide(answer);
+
+          var userData = {email: jsonLoginData.email, topUpAmount: topUpAmount}
+          var strTopUpData = JSON.stringify(userData)
+
+          console.log('Top Up Data: ' + strTopUpData)
+
+          $http.post('/topUp/' + strTopUpData).then(function(response) {
+              if(response.data.code == '00') {
+                  $rootScope.refresh()
+              } else {
+                  console.log('Fail of epic proprtions.')
+              }
+          })
+        };
+      }
 })

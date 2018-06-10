@@ -22,12 +22,17 @@ router.post('/uiRegister/:ToDo', function(req, res) {
     })
 })
 
-router.post('/topup/:ToDo', function(req, res) {
-    
-})
-
 router.get('/getUsers', function(req, res){
     userMod.getAllUsers(function(response){
+        res.send(response)
+    })
+})
+
+router.post('/topUp/:ToDo', function(req, res) {
+    var topUpData = JSON.parse(req.params.ToDo)
+
+    logger.info('Top up user: ' + topUpData.email + ' by the amount of ' + topUpData.topUpAmount)
+    userMod.topUp(topUpData, function(response) {
         res.send(response)
     })
 })
